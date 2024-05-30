@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    font-family: Arial, sans-serif; /* Specify the desired font family */
+    font-size: 24px; /* Specify the desired font size */
+    font-weight: bold; /* Specify the desired font weight */
+    color: #5b128f; /* Specify the desired font color */
+  }
+  
+  #chatbox {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #000000;
+    padding: 10px;
+  }
+  
+  #userInput {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #000000;
+    font-size: 16px;
+  }
+  

@@ -1,0 +1,70 @@
+
+//this is the html file that will be used to display the chatbot
+//the user will be able to type in a message and the chatbot will respond
+//the chatbot will be a python script that will be called from this html file
+//the python script will be called using a POST request
+//the response from the python script will be displayed in a new window
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chatbot</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		/* Add some styles for the chat window */
+		.chat-window {
+			width: 400px;
+			height: 400px;
+			border: 1px solid black;
+			overflow-y: scroll;
+			padding: 10px;
+		}
+		.chat-window p {
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Chatbot</h1>
+	<p>Type your message below:</p>
+	<input type="text" id="user-input">
+	<button onclick="submitMessage()">Send</button>
+
+	<!-- Create a div to display the chat messages -->
+	<div class="chat-window" id="chat-window"></div>
+
+	<script>
+		function submitMessage() {
+			// Get the user input
+			var userInput = document.getElementById("user-input").value;
+
+			// Clear the input field
+			document.getElementById("user-input").value = "";
+
+			// Send a POST request to the Python script to get the response
+			fetch("/chatbot", {
+				method: "POST",
+				body: JSON.stringify({"message": userInput})
+			})
+			.then(response => response.json())
+			.then(data => {
+				// Create a new window to display the response
+				var responseWindow = window.open("", "Response", "width=400,height=400");
+
+				// Display the response in the new window
+				responseWindow.document.write("<h1>Response</h1>");
+				responseWindow.document.write("<div class='chat-window'>");
+				for (var i = 0; i < data.length; i++) {
+					responseWindow.document.write("<p>" + data[i] + "</p>");
+				}
+				responseWindow.document.write("</div>");
+			})
+			.catch(error => {
+				console.error(error);
+			});
+		}
+	</script>
+</body>
+</html>
